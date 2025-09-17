@@ -64,7 +64,7 @@ class InvoiceManager
     // -- INQUIRIES
 
     getBaseUrl(
-        resource
+        resource = ''
         )
     {
         return BASE_URL + resource;
@@ -139,7 +139,7 @@ class InvoiceManager
         }
         catch ( error )
         {
-            console.error( 'Error loading invoices from localStorage:', error );
+            console.error( 'Error loading invoices from api:', error );
             this.invoiceList = [];
         }
     }
