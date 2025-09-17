@@ -1,0 +1,157 @@
+:root {
+    --background: 120 20% 98%;
+    --foreground: 160 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 160 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 15% 15%;
+
+    --primary: 140 65% 35%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 140 65% 30%;
+
+    --secondary: 45 25% 96%;
+    --secondary-foreground: 160 15% 15%;
+
+    --muted: 120 15% 95%;
+    --muted-foreground: 160 10% 45%;
+
+    --accent: 140 25% 92%;
+    --accent-foreground: 140 65% 25%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 120 15% 88%;
+    --input: 120 15% 95%;
+    --ring: 140 65% 35%;
+
+    --success: 140 70% 40%;
+    --success-foreground: 0 0% 98%;
+
+    --warning: 45 100% 50%;
+    --warning-foreground: 45 30% 15%;
+
+    --info: 200 100% 45%;
+    --info-foreground: 0 0% 98%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(140 65% 35%), hsl(140 60% 45%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(120 15% 98%));
+    --gradient-bg: linear-gradient(160deg, hsl(120 25% 98%), hsl(140 20% 96%));
+
+    --shadow-soft: 0 2px 8px -2px hsl(140 20% 20% / 0.08);
+    --shadow-medium: 0 4px 20px -4px hsl(140 30% 15% / 0.12);
+    --shadow-strong: 0 8px 30px -6px hsl(140 40% 10% / 0.15);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+.calculator-icon {
+    background-color: hsl(var(--primary));
+    mask: url("./public/calculator.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/calculator.svg") no-repeat center center / contain;
+}
+
+.green-file-text-icon {
+    background-color: hsl(var(--success));
+    mask: url("./public/file_text.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/file_text.svg") no-repeat center center / contain;
+}
+
+.file-text-icon {
+    background-color: hsl(var(--muted-foreground));
+    mask: url("./public/file_text.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/file_text.svg") no-repeat center center / contain;
+}
+
+.trending-up-icon {
+    background-color: hsl(var(--success));
+    mask: url("./public/trending_up.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/trending_up.svg") no-repeat center center / contain;
+}
+
+.arrow-up-down-icon {
+    background-color: hsl(var(--muted-foreground));
+    mask: url("./public/arrow_up_down.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/arrow_up_down.svg") no-repeat center center / contain;
+}
+
+.receipt-icon {
+    background-color: hsl(var(--muted-foreground));
+    mask: url("./public/receipt.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/receipt.svg") no-repeat center center / contain;
+}
+
+.blue-receipt-icon {
+    background-color: hsl(var(--info));
+    mask: url("./public/receipt.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/receipt.svg") no-repeat center center / contain;
+}
+
+.search-icon {
+    background-color: hsl(var(--muted-foreground));
+    mask: url("./public/search.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/search.svg") no-repeat center center / contain;
+}
+
+.arrow-up-icon {
+    background-color: hsl(var(--foreground));
+    mask: url("./public/arrow_up.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/arrow_up.svg") no-repeat center center / contain;
+}
+
+.arrow-down-icon {
+    background-color: hsl(var(--foreground));
+    mask: url("./public/arrow_down.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/arrow_down.svg") no-repeat center center / contain;
+}
+
+.plus-icon {
+    background-color: white;
+    mask: url("./public/plus.svg") no-repeat center center / contain;
+    -webkit-mask: url("./public/plus.svg") no-repeat center center / contain;  
+}
+
+.bg-primary\/10 {
+    background-color: hsl(var(--primary) / 0.1);
+}
+
+.bg-secondary {
+    background-color: hsl(var(--secondary));
+}
+
+.bg-secondary\/80 {
+    background-color: hsl(var(--secondary) / 0.8);
+}
+
+.text-secondary-foreground {
+    color: hsl(var(--secondary-foreground));
+}
+
+body {
+    background: var(--gradient-bg);
+}
+
+.card {
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+}

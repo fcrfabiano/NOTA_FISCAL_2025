@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Notas Fiscais</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <style type="text/tailwindcss">
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <div class="min-h-screen py-8">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <!-- Header -->
+            <header class="mb-8 text-center">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <div class="p-3 rounded-xl bg-primary/10">
+                        <div class="calculator-icon w-8 h-8"></div>
+                    </div>
+                    <h1 class="text-4xl font-bold text-[hsl(var(--success))]">
+                        Sistema de Notas Fiscais
+                    </h1>
+                </div>
+                <p class="text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto">
+                    Gerencie suas notas fiscais de forma simples e eficiente. Cadastre, visualize e organize todas as suas informações em um só lugar.
+                </p>
+            </header>
+
+            <main class="space-y-8">
+                <!-- Formulário de Cadastro -->
+                <section class="card rounded-xl p-6">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="p-2 rounded-lg bg-primary/10">
+                            <div class="green-file-text-icon w-5 h-5"></div>
+                        </div>
+                        <h2 class="text-xl font-semibold">Cadastrar Nova Nota Fiscal</h2>
+                    </div>
+                    
+                    <form id="invoiceForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="invoiceNumber" class="block text-sm font-medium">Número da Nota *</label>
+                                <input type="text" id="invoiceNumber" name="invoiceNumber" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50" 
+                                       placeholder="Ex: 001234" required>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <label for="clientName" class="block text-sm font-medium">Cliente *</label>
+                                <input type="text" id="clientName" name="clientName" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50" 
+                                       placeholder="Nome do cliente" required>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <label for="invoiceValue" class="block text-sm font-medium">Valor (R$) *</label>
+                                <input type="number" id="invoiceValue" name="invoiceValue" step="0.01" min="0"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50" 
+                                       placeholder="0,00" required>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <label for="issueDate" class="block text-sm font-medium">Data de Emissão *</label>
+                                <div class="relative">
+                                    <input type="date" id="issueDate" name="issueDate" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50" 
+                                           max="" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-end gap-2">
+                            <button type="submit" 
+                                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg flex items-center gap-2 transition-colors cursor-pointer">
+                                <div class="plus-icon w-4 h-4"></div>
+                                Cadastrar
+                            </button>
+                        </div>
+                    </form>
+                </section>
+                <!-- Fim Formulário de Cadastro -->
+
+                <!-- Sumário Estatísticas -->
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                                <span class="receipt-icon w-5 h-5 text-primary"/>
+                            </div>
+                            <span class="text-sm font-medium text-gray-600">Total de Notas</span>
+                        </div>
+                        <div class="text-2xl font-bold" id="totalInvoices">0</div>
+                    </div>
+                    
+                    <div class="card rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                                <span class="trending-up-icon w-5 h-5"/>
+                            </div>
+                            <span class="text-sm font-medium text-gray-600">Valor Total</span>
+                        </div>
+                        <div class="text-2xl font-bold text-green-600" id="totalValue">R$ 0,00</div>
+                    </div>
+                    
+                    <div class="card rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                                <span class="blue-receipt-icon w-5 h-5"/>
+                            </div>
+                            <span class="text-sm font-medium text-gray-600">Valor Médio</span>
+                        </div>
+                        <div class="text-2xl font-bold text-blue-600" id="averageValue">R$ 0,00</div>
+                    </div>
+                </section>
+                <!-- Fim Sumário Estatísticas -->
+
+                <!-- Tabela de Notas Fiscais -->
+                <section class="card rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold">Notas Fiscais Cadastradas</h2>
+                        <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-sm" id="recordCount">0 registros</span>
+                    </div>
+                    
+                    <div class="flex gap-4 mb-6">
+                        <div class="flex-1 relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <div class="w-4 h-4 rounded-sm flex items-center justify-center">
+                                    <span class="search-icon w-4 h-4"/>
+                                </div>
+                            </div>
+                            <input type="text" id="searchInput" 
+                                   class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50" 
+                                   placeholder="Buscar por cliente...">
+                        </div>
+                        
+                        <button id="sortButton" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-2 cursor-pointer">
+                            <div class="arrow-up-down-icon w-4 h-4"></div>
+                            Ordenar por Valor
+                        </button>
+                    </div>
+                    
+                    <div id="invoiceTable" class="overflow-hidden">
+                        <div id="emptyState" class="text-center py-12">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="receipt-icon w-12 h-12"></span>
+                            </div>
+                            <p class="text-gray-500">Nenhuma nota fiscal cadastrada ainda.</p>
+                        </div>
+                        
+                        <div id="invoiceList" class="hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Número</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="invoiceTableBody" class="card divide-y divide-gray-200">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Fim Tabela de Notas Fiscais -->
+            </main>
+
+            <!-- Footer -->
+            <footer class="mt-12 pt-8 border-t border-gray-200 text-center">
+                <div class="flex items-center justify-center gap-2 text-gray-500">
+                    <div class="file-text-icon w-4 h-4"></div>
+                    <span class="text-sm">
+                        Sistema desenvolvido para gestão eficiente de notas fiscais
+                    </span>
+                </div>
+            </footer>
+            <!-- Fim Footer -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
